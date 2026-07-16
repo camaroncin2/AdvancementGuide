@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "advancementguide",
+  "version": "${version}",
+  "name": "Advancement Guide",
+  "description": "Menu de logros de cliente: los ves TODOS (tambien los que te faltan) con nombre, icono, fecha y como conseguirlos. Buscador, filtro por categoria y guias que puedes escribir tu. Dos aspectos: Codice y LogPad.",
+  "authors": ["camaroncin"],
+  "contact": {
+    "homepage": "https://github.com/camaroncin2/AdvancementGuide",
+    "sources": "https://github.com/camaroncin2/AdvancementGuide",
+    "issues": "https://github.com/camaroncin2/AdvancementGuide/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/advancementguide/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.camaroncin.advancementguide.AdvancementGuideClient"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "advancementguide.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "~26.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}

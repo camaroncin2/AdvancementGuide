@@ -1,0 +1,10 @@
+build/
+.gradle/
+run/
+*.class
+.idea/
+*.iml
+.vscode/
+# volcados de la JVM cuando se queda sin memoria
+hs_err_pid*.log
+replay_pid*.log
