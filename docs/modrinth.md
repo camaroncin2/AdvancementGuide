@@ -20,6 +20,9 @@
 > El **Summary** es lo único que se ve en los resultados de búsqueda: por eso
 > dice qué problema resuelve y no cómo se llama.
 
+> La **Description** completa, lista para copiar y pegar, esta en
+> [modrinth-description.md](modrinth-description.md). Lo de abajo es un resumen.
+
 ---
 
 ## Description (cuerpo de la página)
