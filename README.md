@@ -80,6 +80,13 @@ Copia `src/main/resources/assets/advancementguide/lang/en_us.json` a tu idioma
 (por ejemplo `pt_br.json`) y traduce los valores, nunca las claves. Lo que no
 traduzcas cae a inglés solo. Las pull requests son bienvenidas.
 
+> **Ojo con las variantes regionales.** Minecraft no hace fallback dentro de un
+> idioma: carga `en_us` y luego el código **exacto** que tengas elegido. Por eso
+> `es_mx` (Español de México) **no** lee `es_es.json`, y quien lo tuviera veía
+> todo en inglés. En el repo solo se mantiene `es_es.json`; `build.gradle` lo
+> copia al compilar a `es_ar`, `es_cl`, `es_ec`, `es_mx`, `es_uy`, `es_ve` y
+> `esan`. Si traduces una variante de verdad, tu archivo manda sobre la copia.
+
 ## Compilar
 
 ```bash

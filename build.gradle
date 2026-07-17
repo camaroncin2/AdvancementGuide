@@ -20,11 +20,34 @@ dependencies {
     implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 }
 
+// Minecraft NO hace fallback entre variantes de un idioma: carga en_us y luego
+// el codigo EXACTO elegido, y nada mas. O sea que quien juegue en "Espanol
+// (Mexico)" (es_mx) no ve es_es.json y le sale TODO en ingles.
+// Se copia es_es.json a las demas variantes al compilar, en vez de mantener
+// siete archivos identicos a mano que se desincronizarian al primer cambio.
+def variantesEs = ['es_ar', 'es_cl', 'es_ec', 'es_mx', 'es_uy', 'es_ve', 'esan']
+
 processResources {
     def version = project.version
     inputs.property "version", version
+    inputs.property "variantesEs", variantesEs
     filesMatching("fabric.mod.json") {
         expand "version": version
+    }
+    doLast {
+        def dir = new File(sourceSets.main.output.resourcesDir, "assets/advancementguide/lang")
+        def base = new File(dir, "es_es.json")
+        if (!base.exists()) {
+            throw new GradleException("Falta ${base}: sin el, ningun espanol tendria textos.")
+        }
+        variantesEs.each { codigo ->
+            def destino = new File(dir, "${codigo}.json")
+            // Si algun dia alguien traduce una variante de verdad, su archivo manda.
+            if (!destino.exists()) {
+                destino.bytes = base.bytes
+            }
+        }
+        logger.lifecycle("Idiomas: es_es copiado a ${variantesEs.size()} variantes de espanol.")
     }
 }
 
