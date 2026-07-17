@@ -1,138 +1,148 @@
-<!-- ══════════════════════════════════════════════════════════════════════
-     COPIA TODO LO DE ABAJO Y PEGALO EN Modrinth -> Settings -> Description
-     Busca "PEGA-AQUI" para encontrar los huecos de las imagenes.
-     Sube antes las capturas a Gallery: al subirlas te dan una URL, y esa
-     es la que pegas.
-     ══════════════════════════════════════════════════════════════════════ -->
+![Advancement Guide](URL)
 
-<!-- ──────── IMAGEN 1: el Códice entero, con un logro seleccionado ──────── -->
-![Advancement Guide](PEGA-AQUI-LA-URL-DE-LA-IMAGEN)
+## Minecraft te esconde la mitad de sus logros
 
-## Minecraft hides half its advancements from you
+Abres la pantalla de logros y ahí están: filas de `???`. Sin nombre, sin icono,
+sin saber siquiera qué son. Y los que sí ves te dan una línea de texto y poco más.
 
-Open the vanilla screen and there they are: rows of `???`. No name, no icon, no
-idea what they even are — let alone how to get them. And the ones you *can* see
-only give you a single line of text.
+**Advancement Guide te enseña los 126.** Los que tienes y los que no, cada uno
+con su nombre, su icono, la fecha en que lo conseguiste y **cómo se consigue de
+verdad**.
+
+Pulsa **G** y ya está.
+
+<br>
+
+## 📜 Todos los logros, siempre
+
+Se acabaron los `???`. Nombre, icono y fecha de cada uno, los tengas o no.
+
+![Todos los logros](URL)
+
+<br>
+
+## ✍️ 105 guías escritas a mano
+
+Nada de texto automático. Están escritas una a una, explicando el truco real:
+el bioma, el encantamiento, la altura a la que picar.
+
+> **Cúbreme de diamantes**
+> *Encuentra mineral de diamante en las capas profundas del mundo, siendo Y -59
+> una de las mejores alturas. Usa un pico de hierro o superior para extraerlo.
+> Si tienes Fortuna III conseguirás más diamantes.*
+
+En **español e inglés**, siguiendo el idioma de tu juego.
+
+<br>
+
+## 🎯 Te dice exactamente lo que te falta
+
+En los logros de colección —los 55 biomas, las 41 criaturas, las 40 comidas— una
+guía no sirve de nada. Así que el panel te lista **los que aún te faltan**,
+sacados de tu progreso real:
+
+> **Hora de aventura**
+> *Te faltan 51 de 55: Snowy slopes, Jagged peaks, Bamboo jungle, Cherry grove,
+> Deep dark…*
+
+![Lo que te falta](URL)
+
+<br>
+
+## 🔍 Encuéntralo rápido
+
+**Buscador** y **filtro por categoría** —Minería, Inframundo, El Fin, Combate y
+Granja— para no ir pasando páginas buscando uno.
+
+![Buscador y categorías](URL)
+
+<br>
+
+## 🎭 Dos aspectos, una tecla
+
+Pulsa **T** para cambiar sin salir del menú. Se recuerda tu elección.
+
+**Códice** — piedra tallada, jade y obsidiana, con una serpiente emplumada
+vigilando.
+
+**LogPad** — el aparato original. Rojo, limpio, directo.
+
+![Los dos aspectos](URL)
+
+<br>
+
+## 🧍 Tu cabeza, en 3D
+
+Tu propia skin, en 3D, siguiendo al ratón.
+
+<br>
+
+## 🖊️ Haz tuyas las guías
+
+Cualquier guía se puede reescribir. Abre el menú una vez y tendrás un archivo con
+los 126 logros **ya con su nombre en tu idioma** para que los encuentres.
+
+Escribe tu texto, pulsa **G** y ahí está: **se relee cada vez que abres el menú**,
+sin reiniciar. Ideal para servidores con sus propias reglas.
+
+<br>
+
+---
+
+## Cómo se usa
+
+| Tecla | Qué hace |
+|:---:|---|
+| **G** | Abre el menú *(se puede cambiar en Opciones → Controles)* |
+| **T** | Cambia de aspecto |
+
+La rueda del ratón hace scroll en *cómo conseguirlo*.
+
+## Solo cliente
+
+**El servidor no necesita nada.** Funciona en cualquier servidor porque todo pasa
+en tu lado. Cada jugador que lo quiera se lo instala y listo.
+
+## Necesita
+
+**Fabric Loader** 0.19.3+ · **Fabric API** · **Java 25+**
+
+<br>
+
+---
+
+<br>
+
+# 🇬🇧 In English
+
+Open the vanilla advancements screen and there they are: rows of `???`. No name,
+no icon, no idea what they even are. And the ones you *can* see only give you a
+single line of text.
 
 **Advancement Guide shows you all 126.** The ones you have and the ones you
 don't, each with its name, its icon, the date you unlocked it, and a real
-explanation of how to get it.
+explanation of how to get it. Press **G**.
 
-Press **G**. That's it.
+**📜 Everything, always** — no more `???`. Name, icon and date for every single
+advancement.
 
----
+**✍️ 105 hand-written guides** — not auto-generated filler. The real trick for
+each one: the biome, the enchantment, the height to mine at. In English and
+Spanish, following your game's language.
 
-## Everything, always — no more `???`
+**🎯 It tells you what you're missing** — for the big collection advancements
+(55 biomes, 41 mobs, 40 foods) it lists **the ones you still need**, pulled from
+your real progress.
 
-Servers only send your client the advancements they decide to show you, so the
-complete list ships inside the mod, read straight from the game's own
-definitions. Nothing is hidden: name, icon and date for every single one.
+**🔍 Search box and category filters** — Mining, Nether, The End, Combat, Farming.
 
-<!-- ──────── IMAGEN 2: la lista con logros conseguidos y pendientes ──────── -->
-![Every advancement](PEGA-AQUI-LA-URL-DE-LA-IMAGEN)
+**🎭 Two skins, one key** — press **T** to switch: the **Códice** (carved stone,
+jade and obsidian) or the original **LogPad**.
 
-## 105 guides, written by hand
+**🧍 Your head in 3D**, following your mouse.
 
-Not auto-generated filler. Someone sat down and wrote how each advancement is
-*actually* done — the trick, the biome, the enchantment, the height to mine at.
+**🖊️ Rewrite any guide** in a config file that is re-read every time you open the
+menu — no restart needed.
 
-> **Cover Me With Diamonds** — *Find diamond ore in the deep layers of the world;
-> Y -59 is one of the best heights. Use an iron pickaxe or better to mine it.
-> With Fortune III you get more diamonds.*
-
-Available in **English and Spanish**, following your game's language.
-
-## It tells you exactly what you're missing
-
-For the big collection advancements — the 55 biomes, the 41 mobs, the 40 foods —
-a guide would be useless. So instead the panel lists **the ones you still need**,
-pulled from your real progress:
-
-> **Adventuring Time** — *You're missing 51 of 55: Snowy slopes, Jagged peaks,
-> Bamboo jungle, Cherry grove, Deep dark…*
-
-<!-- ──────── IMAGEN 3: un logro de varios requisitos, con la lista ──────── -->
-![What you're missing](PEGA-AQUI-LA-URL-DE-LA-IMAGEN)
-
-## Find it fast
-
-A **search box** and **category filters** — Mining, Nether, The End, Combat,
-Farming — so you are not paging through 126 entries looking for one.
-
-## Two skins, one key
-
-Press **T** to switch without leaving the menu. Your choice is remembered.
-
-| | |
-|---|---|
-| **Códice** | Carved stone, jade and obsidian, watched over by a feathered serpent. |
-| **LogPad** | The original device. Red, clean, functional. |
-
-<!-- ──────── IMAGEN 4: los dos aspectos, uno al lado del otro ──────── -->
-![Two skins](PEGA-AQUI-LA-URL-DE-LA-IMAGEN)
-
-## Your head, in 3D
-
-Your own skin, rendered in 3D in the sidebar, following your mouse.
-
-## Make the guides yours
-
-Every guide can be rewritten. Open the menu once and you get
-`config/advancementguide-guias.json`, with all 126 advancements **already named
-in your language** so you can find them:
-
-```json
-{ "id": "minecraft:story/mine_stone", "logro": "Stone Age", "guia": "" }
-```
-
-Write your text, press **G**, and it's there — **the file is re-read every time
-you open the menu**, no restart needed. Perfect for servers with custom rules or
-private jokes.
-
----
-
-## How to use
-
-| Key | Action |
-|---|---|
-| **G** | Open the menu — rebindable in Options → Controls |
-| **T** | Switch skin |
-
-The mouse wheel scrolls the *how to get it* panel.
-
-## Client side only
-
-**The server needs nothing.** It works on any server — vanilla, modded, public,
-whatever — because everything happens on your side. Each player who wants it
-just installs it.
-
-## Requires
-
-- **Fabric Loader** 0.19.3+
-- **Fabric API**
-- **Java 25+** (the one 26.2 already uses)
-
----
-
-# En español
-
-Minecraft te esconde los logros que aún no tienes detrás de un `???`, y de los
-que sí ves solo te da una línea de texto.
-
-**Advancement Guide te enseña los 126**: los que tienes y los que no, con su
-nombre, su icono, la fecha y **cómo se consigue de verdad**.
-
-- **105 guías escritas a mano**, en español e inglés, explicando el truco real de
-  cada logro.
-- **Te dice lo que te falta.** En los de varios requisitos (los 55 biomas, las 41
-  criaturas, las 40 comidas) te lista **cuáles te faltan**, no una frase genérica.
-- **Buscador** y **filtro por categoría**: Minería, Inframundo, El Fin, Combate,
-  Granja.
-- **Tu cabeza en 3D**, siguiendo al ratón.
-- **Dos aspectos** que se cambian con **T**: el **Códice** (piedra, jade y
-  obsidiana) y el **LogPad** original.
-- **Puedes reescribir cualquier guía** en `config/advancementguide-guias.json`,
-  que se relee cada vez que abres el menú.
-
-**Solo cliente**: el servidor no necesita nada y funciona en cualquiera. Abre con
-**G**.
+**Client side only.** The server needs nothing and it works anywhere. Requires
+Fabric Loader 0.19.3+, Fabric API and Java 25+.
