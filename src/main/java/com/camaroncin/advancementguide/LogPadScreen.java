@@ -7,6 +7,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.FormattedCharSequence;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Tema LOGPAD: el aparato rojo, dibujado pixel a pixel sobre una sola textura.
@@ -115,7 +116,8 @@ public class LogPadScreen extends PantallaLogros {
         // 3) Contador global (sobre el catalogo completo, no el filtrado)
         int conseguidos = Logros.contarConseguidos(todos);
         g.centeredText(font, Component.literal(conseguidos + "/" + todos.size()), x + 48, y + 90, 0xFFFFFFFF);
-        g.centeredText(font, Component.literal("LOGROS"), x + 48, y + 102, 0xFFB9C6D8);
+        g.centeredText(font, Component.translatable("advancementguide.logros"),
+                x + 48, y + 102, 0xFFB9C6D8);
 
         // 3) Botones de categoria (el activo se resalta con su sprite)
         for (int i = 0; i < CAT_ID.length; i++) {
@@ -124,7 +126,7 @@ public class LogPadScreen extends PantallaLogros {
                 g.blit(RenderPipelines.GUI_TEXTURED, TEXTURA, x + CAT_X, y + CAT_Y[i],
                         CATON_U, CATON_V, CATON_W, CATON_H, TEX_W, TEX_H);
             }
-            g.centeredText(font, Component.literal(CAT_NOM[i]), x + CAT_X + CAT_W / 2,
+            g.centeredText(font, nombreCategoria(i), x + CAT_X + CAT_W / 2,
                     y + CAT_Y[i] + 6, activa ? 0xFFFFFFFF : 0xFFB9C6D8);
         }
 
@@ -132,7 +134,8 @@ public class LogPadScreen extends PantallaLogros {
         g.text(font, Component.literal(pagina + "/" + paginas), x + 316, y + 52, 0xFFFFFFFF);
 
         if (lista.isEmpty()) {
-            g.centeredText(font, Component.literal("Sin resultados"), x + 176, y + 140, 0xFFFFFFFF);
+            g.centeredText(font, Component.translatable("advancementguide.sin_resultados"),
+                    x + 176, y + 140, 0xFFFFFFFF);
             return;
         }
 
@@ -157,8 +160,7 @@ public class LogPadScreen extends PantallaLogros {
             g.item(e.icono(), x + FILA_X + 5, fy + 5);
             g.text(font, font.split(e.titulo(), FILA_W - 32).get(0), x + FILA_X + 28, fy + 4,
                     e.conseguido() ? 0xFF1E5B2A : 0xFF3D4A5C, false);
-            String fechaTxt = e.conseguido() ? "Obtenido: " + fechaDe(e.progress()) : "--/--/----";
-            g.text(font, Component.literal(fechaTxt), x + FILA_X + 28, fy + 15,
+            g.text(font, textoFecha(e), x + FILA_X + 28, fy + 15,
                     e.conseguido() ? 0xFF4A5568 : 0xFF8A97A8, false);
         }
 
@@ -183,14 +185,15 @@ public class LogPadScreen extends PantallaLogros {
         FormattedCharSequence tit = font.split(e.titulo(), anchoTxt).get(0);
         g.text(font, tit, centro - font.width(tit) / 2, y + 118,
                 hecho ? 0xFFFFFFFF : 0xFFD6E4F0, false);
-        g.centeredText(font, Component.literal(e.tipo().nombre().toUpperCase()),
+        g.centeredText(font, Component.literal(e.tipo().nombre().getString().toUpperCase(Locale.ROOT)),
                 centro, y + 129, colorTipo(e.tipo()));
 
         // Si no hay nada que anadir abajo, la descripcion se queda con el panel.
         List<FormattedCharSequence> lineas = lineasComo(e, anchoTxt - 10);
         boolean hayComo = !lineas.isEmpty();
 
-        g.text(font, Component.literal("DESCRIPCION:"), dx, y + 143, 0xFFFFE08A, false);
+        g.text(font, Component.translatable("advancementguide.descripcion"),
+                dx, y + 143, 0xFFFFE08A, false);
         parrafo(g, e.descripcion(), dx, y + 154, anchoTxt,
                 hayComo ? MAX_LIN_DESC : MAX_LIN_DESC_SOLA, 0xFFEAF2FA);
 
@@ -199,7 +202,8 @@ public class LogPadScreen extends PantallaLogros {
         }
 
         // ---- COMO CONSEGUIRLO (zona con scroll) ----
-        g.text(font, Component.literal("COMO CONSEGUIRLO:"), dx, y + 186, 0xFFFFE08A, false);
+        g.text(font, Component.translatable("advancementguide.como"),
+                dx, y + 186, 0xFFFFE08A, false);
 
         int visibles = COMO_H / font.lineHeight;
         int maxScroll = Math.max(0, lineas.size() - visibles);

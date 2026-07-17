@@ -27,9 +27,15 @@ import java.util.Map;
  * Aqui se puede escribir un texto propio para cada logro, que es lo que se
  * muestra en "COMO CONSEGUIRLO".
  *
- * El archivo se genera solo la primera vez, con los 126 logros y su nombre ya
- * traducido al idioma del juego para que sea facil encontrarlos. Si en una
- * version futura aparecen logros nuevos, se anaden sin tocar lo ya escrito.
+ * El mod ya trae 105 guias escritas, y van en los archivos de idioma
+ * (assets/advancementguide/lang/*.json) con la clave que devuelve clave(). Ahi y
+ * no en un JSON aparte porque asi Minecraft elige solo el idioma del jugador y
+ * cae a ingles si algo falta, sin escribir ni una linea de codigo.
+ *
+ * El archivo de config MANDA sobre las del mod, y se genera solo la primera vez,
+ * con los 126 logros y su nombre ya traducido para que sea facil encontrarlos.
+ * Si en una version futura aparecen logros nuevos, se anaden sin tocar lo ya
+ * escrito.
  */
 public final class Guias {
 
@@ -40,8 +46,8 @@ public final class Guias {
             .setPrettyPrinting().disableHtmlEscaping().create();
 
     private static final String[] AYUDA = {
-            "Tu propia guia de como conseguir cada logro.",
-            "Escribe el texto en 'guia'. Si lo dejas vacio, LogPad usa la descripcion del juego.",
+            "Tu propia guia de como conseguir cada logro. Manda sobre la que trae el mod.",
+            "Escribe el texto en 'guia'. Si lo dejas vacio se usa la del mod, en tu idioma.",
             "Usa \\n para partir en varias lineas: el apartado tiene scroll, puede ser largo.",
             "'logro' es solo para que los encuentres; no hace falta tocarlo.",
             "Los logros de varios requisitos (biomas, comidas...) ya listan solos lo que te falta,",
@@ -53,7 +59,16 @@ public final class Guias {
     private Guias() {
     }
 
-    /** La guia escrita para ese logro, o null si no hay ninguna. */
+    /**
+     * La clave de idioma de la guia de un logro.
+     * "minecraft:story/mine_stone" -> "advancementguide.guia.minecraft.story.mine_stone"
+     * (los ':' y '/' no pintan nada en una clave de idioma).
+     */
+    public static String clave(String id) {
+        return "advancementguide.guia." + id.replace(':', '.').replace('/', '.');
+    }
+
+    /** La guia que haya escrito el jugador para ese logro, o null si no hay. */
     public static String de(String id) {
         if (guias == null) {
             guias = leer();

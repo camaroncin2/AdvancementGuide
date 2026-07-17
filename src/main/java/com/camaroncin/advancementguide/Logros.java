@@ -42,16 +42,19 @@ public final class Logros {
 
     /** Tarea, objetivo o desafio (el "frame" del logro; los desafios son los duros). */
     public enum Tipo {
-        TAREA("Tarea"), OBJETIVO("Objetivo"), DESAFIO("Desafio");
+        TAREA("advancementguide.tipo.tarea"),
+        OBJETIVO("advancementguide.tipo.objetivo"),
+        DESAFIO("advancementguide.tipo.desafio");
 
-        private final String nombre;
+        private final String clave;
 
-        Tipo(String nombre) {
-            this.nombre = nombre;
+        Tipo(String clave) {
+            this.clave = clave;
         }
 
-        public String nombre() {
-            return nombre;
+        /** El nombre en el idioma del juego. */
+        public Component nombre() {
+            return Component.translatable(clave);
         }
 
         static Tipo de(String frame) {

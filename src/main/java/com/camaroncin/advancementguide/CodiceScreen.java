@@ -188,7 +188,8 @@ public class CodiceScreen extends PantallaLogros {
         g.blit(RenderPipelines.GUI_TEXTURED, MARCO, x, y, 0f, 0f, ANCHO, ALTO, ANCHO, ALTO);
 
         // 2) Titulo sobre la placa de jade (x 228..411, y 32..52)
-        g.centeredText(font, Component.literal("CODICE DE LOGROS"), x + 320, y + 38, 0xFF0E2A26);
+        g.centeredText(font, Component.translatable("advancementguide.titulo"),
+                x + 320, y + 38, 0xFF0E2A26);
 
         // 3) Barra lateral: cara, contador y categorias
         barraLateral(g, mouseX, mouseY);
@@ -197,7 +198,8 @@ public class CodiceScreen extends PantallaLogros {
         barraSuperior(g);
 
         if (lista.isEmpty()) {
-            g.centeredText(font, Component.literal("Sin resultados"), x + 247, y + 170, PIEDRA_TXT);
+            g.centeredText(font, Component.translatable("advancementguide.sin_resultados"),
+                    x + 247, y + 170, PIEDRA_TXT);
             return;
         }
 
@@ -274,7 +276,9 @@ public class CodiceScreen extends PantallaLogros {
             g.blit(RenderPipelines.GUI_TEXTURED, CAT_ICONOS, cx + 2, cy + 2,
                     (float) (i * ICO), 0f, ICO, ICO, ICO_TEX_W, ICO);
 
-            g.text(font, Component.literal(CAT_NOM[i].toUpperCase(Locale.ROOT)),
+            // getString() para poder ponerlo en mayusculas: sirve igual en los
+            // dos idiomas y no obliga a repetir cada nombre en el archivo.
+            g.text(font, Component.literal(nombreCategoria(i).getString().toUpperCase(Locale.ROOT)),
                     cx + SLOT + 3, cy + 6, activa ? 0xFFFFFFFF : PIEDRA_TXT, false);
         }
     }
@@ -334,8 +338,7 @@ public class CodiceScreen extends PantallaLogros {
         int tx = fx + izq + 4;
         FormattedCharSequence nombre = font.split(e.titulo(), FILA_W - izq - der - 8).get(0);
         g.text(font, nombre, tx, fy + 9, hecho ? TXT_OK : TXT_NO, false);
-        String fecha = hecho ? "Obtenido: " + fechaDe(e.progress()) : "--/--/----";
-        g.text(font, Component.literal(fecha), tx, fy + 21, TXT_FECHA, false);
+        g.text(font, textoFecha(e), tx, fy + 21, TXT_FECHA, false);
     }
 
     private void dibujarDetalle(GuiGraphicsExtractor g, Logros.Entrada e) {
@@ -351,7 +354,7 @@ public class CodiceScreen extends PantallaLogros {
 
         FormattedCharSequence tit = font.split(e.titulo(), anchoTxt).get(0);
         g.text(font, tit, centro - font.width(tit) / 2, y + 110, hecho ? ORO : JADE_CLARO, false);
-        g.centeredText(font, Component.literal(e.tipo().nombre().toUpperCase()),
+        g.centeredText(font, Component.literal(e.tipo().nombre().getString().toUpperCase(Locale.ROOT)),
                 centro, y + 122, colorTipo(e.tipo()));
 
         // Si no hay nada que anadir abajo, la descripcion se queda con el panel.
@@ -359,7 +362,8 @@ public class CodiceScreen extends PantallaLogros {
         List<FormattedCharSequence> lineas = lineasComo(e, anchoComo);
         boolean hayComo = !lineas.isEmpty();
 
-        g.text(font, Component.literal("DESCRIPCION:"), dx, y + 138, JADE_CLARO, false);
+        g.text(font, Component.translatable("advancementguide.descripcion"),
+                dx, y + 138, JADE_CLARO, false);
         parrafo(g, e.descripcion(), dx, y + 149, anchoTxt,
                 hayComo ? MAX_LIN_DESC : MAX_LIN_DESC_SOLA, 0xFFEAF2F0);
 
@@ -368,7 +372,8 @@ public class CodiceScreen extends PantallaLogros {
         }
 
         // ---- COMO CONSEGUIRLO (con scroll) ----
-        g.text(font, Component.literal("COMO CONSEGUIRLO:"), dx, y + 180, JADE_CLARO, false);
+        g.text(font, Component.translatable("advancementguide.como"),
+                dx, y + 180, JADE_CLARO, false);
 
         int visibles = COMO_H / font.lineHeight;
         int maxScroll = Math.max(0, lineas.size() - visibles);

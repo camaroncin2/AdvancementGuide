@@ -11,12 +11,15 @@ fecha en que lo conseguiste y **cómo conseguirlo**.
 - **Todos los logros, siempre.** El servidor solo manda al cliente los que te
   hace visibles, así que la lista completa va incluida en el mod, sacada de las
   definiciones del propio juego.
+- **105 guías escritas a mano**, en **español e inglés**, explicando cómo se
+  consigue cada logro de verdad (no la frase de una línea del juego).
 - **Cómo conseguirlo de verdad.** En los logros de varios requisitos (los 55
   biomas, las 41 criaturas, las 40 comidas...) te lista **lo que te falta**, no
   una frase genérica.
-- **Guías tuyas.** Puedes escribir tu propio texto para cada logro en
-  `config/advancementguide-guias.json`. El archivo se genera solo, con los
-  nombres ya traducidos a tu idioma.
+- **Guías tuyas.** Puedes cambiar el texto de cualquier logro en
+  `config/advancementguide-guias.json`, que manda sobre las del mod. El archivo
+  se genera solo, con los nombres ya traducidos a tu idioma.
+- **Español e inglés**, siguiendo el idioma del juego.
 - **Buscador** y **filtro por categoría** (Minería, Inframundo, El Fin, Combate,
   Granja).
 - **Tu cabeza en 3D**, girando hacia el ratón.
@@ -44,25 +47,38 @@ Necesita **Java 25+** (el que ya usa 26.2).
 
 La rueda del ratón hace scroll en "cómo conseguirlo".
 
-## Escribir tus propias guías
+## Las guías
+
+El mod trae **105 guías escritas a mano**, en español e inglés. Viven en los
+archivos de idioma (`assets/advancementguide/lang/*.json`) con la clave
+`advancementguide.guia.<id del logro con puntos>`, así que Minecraft elige solo
+el idioma del jugador. Se pueden cambiar con un **resource pack**.
+
+Los otros 21 logros son los de varios requisitos (los 55 biomas, las 41
+criaturas...): esos no necesitan guía, porque el panel te lista **lo que te
+falta de verdad**.
+
+### Cambiarlas por jugador
 
 Al abrir el menú por primera vez se crea `config/advancementguide-guias.json`:
 
 ```json
 {
   "logros": [
-    { "id": "minecraft:story/mine_stone", "logro": "Piedra mineral", "guia": "" }
+    { "id": "minecraft:story/mine_stone", "logro": "La Edad de Piedra", "guia": "" }
   ]
 }
 ```
 
-Escribe en `guia` y eso será lo que salga en **CÓMO CONSEGUIRLO**. Usa `\n` para
-saltos de línea. **Se relee cada vez que abres el menú**, así que no hace falta
-reiniciar. Los que dejes vacíos usan el texto del juego.
+Escribe en `guia` y eso será lo que salga en **CÓMO CONSEGUIRLO**, por encima de
+la del mod. Usa `\n` para saltos de línea. **Se relee cada vez que abres el
+menú**, así que no hace falta reiniciar. Los que dejes vacíos usan la del mod.
 
-De los 126 logros, **24 ya se explican solos** (los de varios requisitos). Los
-otros 102 tienen un único requisito: ahí la descripción del juego ya *es* la
-instrucción, así que el apartado no aparece hasta que le escribas tu guía.
+## Traducir a otro idioma
+
+Copia `src/main/resources/assets/advancementguide/lang/en_us.json` a tu idioma
+(por ejemplo `pt_br.json`) y traduce los valores, nunca las claves. Lo que no
+traduzcas cae a inglés solo. Las pull requests son bienvenidas.
 
 ## Compilar
 

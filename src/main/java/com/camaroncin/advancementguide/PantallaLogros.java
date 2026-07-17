@@ -12,7 +12,9 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.Pose;
 import org.joml.Quaternionf;
@@ -37,7 +39,11 @@ import java.util.Locale;
 public abstract class PantallaLogros extends Screen {
 
     protected static final String[] CAT_ID = {"", "story", "nether", "end", "adventure", "husbandry"};
-    protected static final String[] CAT_NOM = {"Todos", "Minería", "Inframundo", "El Fin", "Combate", "Granja"};
+    /** El nombre de cada categoria sale del archivo de idioma, no del codigo. */
+    protected static final String[] CAT_CLAVE = {
+            "advancementguide.cat.todos", "advancementguide.cat.story",
+            "advancementguide.cat.nether", "advancementguide.cat.end",
+            "advancementguide.cat.adventure", "advancementguide.cat.husbandry"};
 
     protected static final DateTimeFormatter FECHA =
             DateTimeFormatter.ofPattern("dd/MM/yyyy").withZone(ZoneId.systemDefault());
@@ -106,9 +112,10 @@ public abstract class PantallaLogros extends Screen {
         this.todos = Logros.cargar();
 
         Rect r = rectBuscador();
-        buscador = new EditBox(font, r.x(), r.y(), r.w(), r.h(), Component.literal("Buscar logro..."));
+        Component pista = Component.translatable("advancementguide.buscar");
+        buscador = new EditBox(font, r.x(), r.y(), r.w(), r.h(), pista);
         buscador.setMaxLength(48);
-        buscador.setHint(Component.literal("Buscar logro..."));
+        buscador.setHint(pista);
         buscador.setBordered(false);          // el marco lo pone el tema
         // OJO: el color es ARGB. Sin el 0xFF de alfa el texto y el cursor
         // salen transparentes (invisibles).
@@ -278,31 +285,38 @@ public abstract class PantallaLogros extends Screen {
      * Lista VACIA = no hay nada que anadir y el apartado no se dibuja.
      */
     protected List<FormattedCharSequence> lineasComo(Logros.Entrada e, int anchoTxt) {
-        String texto = comoConseguirlo(e);
+        Component texto = comoConseguirlo(e);
         if (texto == null) {
             return List.of();
         }
-        return font.split(Component.literal(texto), anchoTxt);
+        return font.split(texto, anchoTxt);
     }
 
     /**
      * Que poner en "COMO CONSEGUIRLO", o null si no hay nada que anadir.
      *
-     * Minecraft guarda UN solo texto por logro, y en 102 de los 126 ese texto ya
-     * es la instruccion ("Mata un breeze devolviendole su carga de viento"), asi
-     * que repetirlo aqui no aporta nada. Por orden:
+     * Minecraft guarda UN solo texto por logro y ese texto ya suele ser la
+     * instruccion ("Mata un breeze devolviendole su carga de viento"), asi que
+     * repetirlo aqui no aportaria nada. Por orden:
      *  1. la guia que haya escrito el jugador (config/advancementguide-guias.json);
-     *  2. si ya lo tiene, decirlo;
-     *  3. si son varios requisitos, lo que le falta de verdad (eso SI es una guia);
-     *  4. si no, null: la descripcion ya lo explica y se queda con todo el panel.
+     *  2. la guia que trae el mod, en el idioma del juego;
+     *  3. si ya lo tiene, decirlo;
+     *  4. si son varios requisitos, lo que le falta de verdad (eso SI es una guia);
+     *  5. si no, null: la descripcion ya lo explica y se queda con todo el panel.
      */
-    protected String comoConseguirlo(Logros.Entrada e) {
+    protected Component comoConseguirlo(Logros.Entrada e) {
         String propia = Guias.de(e.id());
         if (propia != null && !propia.isEmpty()) {
-            return propia;
+            return Component.literal(propia);
+        }
+        // has() y no translatable() a secas: si la clave no existiera, translatable
+        // devuelve la propia clave y se leeria "advancementguide.guia.minecraft..."
+        String clave = Guias.clave(e.id());
+        if (Language.getInstance().has(clave)) {
+            return Component.translatable(clave);
         }
         if (e.conseguido()) {
-            return "¡Ya lo tienes!";
+            return Component.translatable("advancementguide.ya_lo_tienes");
         }
 
         // Requisitos que faltan de verdad (si el cliente los conoce)
@@ -317,8 +331,9 @@ public abstract class PantallaLogros extends Screen {
                 hechos++;
             }
             if (faltan.size() > 1 || hechos > 0) {
-                return "Te faltan " + faltan.size() + " de " + (hechos + faltan.size()) + ":\n"
-                        + String.join(", ", faltan);
+                return Component.translatable("advancementguide.te_faltan",
+                                faltan.size(), hechos + faltan.size())
+                        .append("\n").append(String.join(", ", faltan));
             }
         }
 
@@ -328,12 +343,28 @@ public abstract class PantallaLogros extends Screen {
             for (String c : e.requisitos()) {
                 reqs.add(limpiar(c));
             }
-            String extra = e.totalReq() > reqs.size()
-                    ? " (y " + (e.totalReq() - reqs.size()) + " mas)" : "";
-            return "Completa los " + e.totalReq() + ":\n" + String.join(", ", reqs) + extra;
+            MutableComponent txt = Component.translatable("advancementguide.completa", e.totalReq())
+                    .append("\n").append(String.join(", ", reqs));
+            if (e.totalReq() > reqs.size()) {
+                txt.append(Component.translatable("advancementguide.y_mas",
+                        e.totalReq() - reqs.size()));
+            }
+            return txt;
         }
 
         return null;
+    }
+
+    /** El nombre de una categoria, en el idioma del juego. */
+    protected Component nombreCategoria(int i) {
+        return Component.translatable(CAT_CLAVE[i]);
+    }
+
+    /** La fecha en que se consiguio, ya con su texto ("Obtenido: ..."). */
+    protected Component textoFecha(Logros.Entrada e) {
+        return e.conseguido()
+                ? Component.translatable("advancementguide.obtenido", fechaDe(e.progress()))
+                : Component.translatable("advancementguide.sin_fecha");
     }
 
     /** "minecraft:snowy_slopes" -> "Snowy slopes" (mas legible). */
